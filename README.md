@@ -54,7 +54,7 @@ identity messages **MUST** conform to the following rules:
    - `identity/add`
    - `identity/tombstone`
  - Has a `identity` field mapping to a BFE "network identity ID",
-   i.e. `<07> + format + data`
+   i.e. `<07 01> + data`
  - Has a `metafeed` field mapping to a BFE "Bendy Butt feed ID", i.e.
  `<00 03> + data`
 
