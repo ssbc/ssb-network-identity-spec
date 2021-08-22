@@ -51,10 +51,10 @@ identity messages **MUST** conform to the following rules:
 
  - Has a `type` field mapping to a BFE string (i.e. `<06 00> + data`)
  which can assume only one the following possible values:
-   - `identity/add`
-   - `identity/tombstone`
- - Has a `identity` field mapping to a BFE "network identity ID",
-   i.e. `<07 01> + data`
+   - `networkidentity/add`
+   - `networkidentity/tombstone`
+ - Has a `networkidentity` field mapping to a BFE "network identity
+   ID", i.e. `<07 01> + data`
  - Has a `metafeed` field mapping to a BFE "Bendy Butt feed ID", i.e.
  `<00 03> + data`
 
@@ -69,10 +69,10 @@ Example content part of a message:
 ```
 {
   "type" => "networkidentity/add",
-  "identity" => (BFE-encoded network identity ID),
+  "networkidentity" => (BFE-encoded network identity ID),
   "metafeed" => (BFE-encoded Bendy Butt feed ID for the meta feed),
   "tangles" => {
-    "identity" => {
+    "networkidentity" => {
       "root" => null,
       "previous" => null
     }
