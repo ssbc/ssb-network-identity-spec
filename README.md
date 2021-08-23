@@ -19,8 +19,9 @@ be the end of the world. Another use case this allows is encrypted
 network identities. Meaning only certain people would know that a
 network identity is you.
 
-In the following we define the message structure for the messages
-written to a network identity feed under the root meta feed.
+A message is written to the root meta feed adding the network
+identities feed:
+
 
 ```
 { 
@@ -31,6 +32,9 @@ written to a network identity feed under the root meta feed.
   "nonce" => (bencode byte sequence with 32 random bytes),
 }
 ```
+
+In the following we define the message structure for the messages
+written to the network identity feed.
 
 ## Message structure
 
