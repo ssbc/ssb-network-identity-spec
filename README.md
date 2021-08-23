@@ -77,7 +77,9 @@ The `contentSignature` field inside a decrypted `contentSection`
 
 If the `type` is `network-identity/add/existing`, then the data part
 of the `network-identity` field should correspond to the data part of
-the feed. The linked feed should exist inside the meta feed tree.
+the feed. The linked feed should exist inside the meta feed
+tree. Otherwise the identity is a new key generated specifically for
+network connections.
 
 Example content part of a message:
 
