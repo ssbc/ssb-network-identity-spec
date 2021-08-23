@@ -23,7 +23,13 @@ In the following we define the message structure for the messages
 written to a network identity feed under the root meta feed.
 
 ```
-{ "type" => "metafeed/add", "feedpurpose" => "networkidentities", "subfeed" => (BFE feed ID) }
+{ 
+  "type" => "metafeed/add/derived", 
+  "feedpurpose" => "network-identities",
+  "subfeed" => (BFE-encoded Bendy Butt feed ID),
+  "metafeed" => (BFE-encoded Bendy Butt feed ID for the meta feed),
+  "nonce" => (bencode byte sequence with 32 random bytes),
+}
 ```
 
 ## Message structure
@@ -51,9 +57,9 @@ identity messages **MUST** conform to the following rules:
 
  - Has a `type` field mapping to a BFE string (i.e. `<06 00> + data`)
  which can assume only one the following possible values:
-   - `networkidentity/add`
-   - `networkidentity/tombstone`
- - Has a `networkidentity` field mapping to a BFE "network identity
+   - `network-identity/add`
+   - `network-identity/tombstone`
+ - Has a `network-identity` field mapping to a BFE "network identity
    ID", i.e. `<07 01> + data`
  - Has a `metafeed` field mapping to a BFE "Bendy Butt feed ID", i.e.
  `<00 03> + data`
@@ -68,11 +74,11 @@ Example content part of a message:
 
 ```
 {
-  "type" => "networkidentity/add",
-  "networkidentity" => (BFE-encoded network identity ID),
+  "type" => "network-identity/add",
+  "network-identity" => (BFE-encoded network identity ID),
   "metafeed" => (BFE-encoded Bendy Butt feed ID for the meta feed),
   "tangles" => {
-    "networkidentity" => {
+    "network-identity" => {
       "root" => null,
       "previous" => null
     }
