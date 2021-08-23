@@ -19,8 +19,9 @@ be the end of the world. Another use case this allows is encrypted
 network identities. Meaning only certain people would know that a
 network identity is you.
 
-In the following we define the message structure for the messages
-written to a network identity feed under the root meta feed.
+A message is written to the root meta feed adding the network
+identities feed:
+
 
 ```
 { 
@@ -31,6 +32,9 @@ written to a network identity feed under the root meta feed.
   "nonce" => (bencode byte sequence with 32 random bytes),
 }
 ```
+
+In the following we define the message structure for the messages
+written to the network identity feed.
 
 ## Message structure
 
@@ -57,24 +61,31 @@ identity messages **MUST** conform to the following rules:
 
  - Has a `type` field mapping to a BFE string (i.e. `<06 00> + data`)
  which can assume only one the following possible values:
-   - `network-identity/add`
+   - `network-identity/add/derived`
+   - `network-identity/add/existing`
    - `network-identity/tombstone`
  - Has a `network-identity` field mapping to a BFE "network identity
    ID", i.e. `<07 01> + data`
  - Has a `metafeed` field mapping to a BFE "Bendy Butt feed ID", i.e.
  `<00 03> + data`
+ - (Only if the type is network-identity/add/derived): a nonce field
+   mapping to a BFE "arbitrary bytes" with size 32, i.e. <06 03> +
+   nonce32bytes
 
 The `contentSignature` field inside a decrypted `contentSection`
 **MUST** use the `identity`'s cryptographic keypair.
 
-Note the data part of the BFE encoded network identity ID can overlap
-with the data part of a BFE encoded feed ID, but does not have to.
+If the `type` is `network-identity/add/existing`, then the data part
+of the `network-identity` field should correspond to the data part of
+the feed. The linked feed should exist inside the meta feed
+tree. Otherwise the identity is a new key generated specifically for
+network connections.
 
 Example content part of a message:
 
 ```
 {
-  "type" => "network-identity/add",
+  "type" => "network-identity/add/existing",
   "network-identity" => (BFE-encoded network identity ID),
   "metafeed" => (BFE-encoded Bendy Butt feed ID for the meta feed),
   "tangles" => {
