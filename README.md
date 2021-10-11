@@ -1,3 +1,9 @@
+<!--
+SPDX-FileCopyrightText: 2021 Anders Rune Jensen
+
+SPDX-License-Identifier: CC-BY-4.0
+-->
+
 # Network Identity Spec
 
 In classical SSB the identity you use over the network during secret a
